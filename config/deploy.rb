@@ -1,9 +1,8 @@
 # RVM
 
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
-require "rvm/capistrano"
-set :rvm_ruby_string, 'default'
-set :rvm_type, :user
+#~ $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+#~ set :rvm_ruby_string, 'default'
+#~ set :rvm_type, :user
 
 # General
 
@@ -125,6 +124,6 @@ namespace :deploy do
   end
 end
 
-after 'deploy:update_code' do
-  run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
-end
+#~ after 'deploy:update_code' do
+  #~ run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
+#~ end
