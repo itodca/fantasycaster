@@ -32,6 +32,6 @@ module ApplicationHelper
   end
   
   def player_status_toggle(position_type, label, status, is_checked)
-    "<span class='playerStatus'><input type='checkbox' id='#{position_type}#{status}' class='playerStatus' data-table='#{position_type}' #{'checked' if is_checked} /><label for='#{position_type}#{status}'>#{label}</label></span>".html_safe
+    "<span class='playerStatus'><input type='checkbox' id='#{position_type}#{status}' class='playerStatus' data-table='#{position_type}' #{'checked' if is_checked} /><label for='#{position_type}#{status}' class='#{status.downcase}'>#{label}</label></span>".html_safe
   end
 end

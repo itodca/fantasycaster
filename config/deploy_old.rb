@@ -3,7 +3,6 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 set :rvm_ruby_string, 'default'
 set :rvm_type, :systen
-require 'rvm/capistrano'
 
 # General
 

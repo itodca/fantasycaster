@@ -1,6 +1,10 @@
 <div class="well">
   <div class="page-header">
-    <h1><%= @league_teams_statistics[params[:t]][:team_name] %> - <%= @league_data.at_css("league name").text %></h1>
+    <h1><%= @league_teams_statistics[params[:t]][:team_name] %> - <%= @league_data.at_css("league name").text %>
+    <span class="pull-right">
+      <%= image_tag("http://l.yimg.com/a/i/ydn/poweredby-71x30.png") %>
+    </span>
+    </h1>
   </div>
 <% if @league_data.at_css("scoring_type").text == "head" %>
 

@@ -5,7 +5,7 @@ body {
   padding-top: 80px;
 }
 
-footer { padding: 40px 0; }
+footer { padding: 25px 0; }
 h1, h2 { letter-spacing: 1px; }
 h2 { padding-bottom: 5px; color: $blue; }
 abbr[title] { border-bottom: none; }
@@ -40,23 +40,36 @@ div.news {
   .timestamp { font-size: 12px; }
 }
 
+div.filter-bar {
+  label { font-size: 12px !important };
+}
 span.playerStatus { margin-right: 20px; }
-span.playerStatus input { margin: 0 3px 0 0; }
+span.playerStatus input { margin: 0 5px 0 0; }
 span.playerStatus label { cursor: pointer; }
+
+table.table {
+	clear: both;
+  td { color: black; }
+  th { background: $blueDark; color: white;}
+}
 
 table.stats-horizontal {
   font-size: 14px;
   border: 1px solid #ddd;
   th, td { vertical-align: middle; text-align: center; }
-  th { background: $grayLight; color: $white; }
   th.title { width: 200px; }
   td { background: $white; }
   td.left-align { text-align: left; }
   td.summary { border-left: 1px solid #ddd; background: #eee; color: $blueDark; }
   span.description { font-weight: normal; color: $grayLight; }
-  tr.a td { color: $infoText; }
-  tr.u td { color: $successText; }
+  tr.a td { color: $blue; font-weight: bold; }
+  tr.u td { font-weight: bold; }
+  tr.o td { color: #777; }
 }
+
+label.a { color: $blue; font-weight: bold; }
+label.u { font-weight: bold; }
+label.o { color: #777; }
 
 table.stats-vertical {
   font-size: 14px;
@@ -75,10 +88,6 @@ table.no-border {
 .dataTables_scrollBody { margin-bottom: 18px; }
 .dataTables_scrollBody table { border-top: none; }
 
-table.table {
-	clear: both;
-}
-
 table.table thead .sorting,
 table.table thead .sorting_asc,
 table.table thead .sorting_desc,
@@ -88,12 +97,12 @@ table.table thead .sorting_desc_disabled {
 	*cursor: hand;
 }
 
-table.table thead .sorting { background: $grayLight url('images/sort_both.png') no-repeat center right; }
-table.table thead .sorting_asc { background: $grayLight url('images/sort_asc.png') no-repeat center right; }
-table.table thead .sorting_desc { background: $grayLight url('images/sort_desc.png') no-repeat center right; }
+table.table thead .sorting { background: $blueDark url('images/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: $blueDark url('images/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: $blueDark url('images/sort_desc.png') no-repeat center right; }
 
-table.table thead .sorting_asc_disabled { background: $grayLight url('images/sort_asc_disabled.png') no-repeat center right; }
-table.table thead .sorting_desc_disabled { background: $grayLight url('images/sort_desc_disabled.png') no-repeat center right; }
+table.table thead .sorting_asc_disabled { background: $blueDark url('images/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: $blueDark url('images/sort_desc_disabled.png') no-repeat center right; }
 
 table.dataTable th:active {
 	outline: none;

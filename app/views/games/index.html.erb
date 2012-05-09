@@ -2,7 +2,11 @@
 <div class="well">
   <% if teams_data.css("league").find_all{|l| l.at_css("is_finished").nil?}.present? %>
   <div class="page-header">
-  <h1>Your Yahoo Fantasy Sports Teams</h1>
+  <h1>Your Yahoo Fantasy Sports Teams
+    <span class="pull-right">
+      <%= image_tag("http://l.yimg.com/a/i/ydn/poweredby-71x30.png") %>
+    </span>
+  </h1>
   </div>
   <ul class="unstyled">
   <% teams_data.css("league").find_all{|l| l.at_css("is_finished").nil?}.group_by{|l| l.parent.parent.at_css("name").text}.each do |game_name, game_leagues| %>
