@@ -1,0 +1,25 @@
+<% if current_user %>
+<div class="well">
+  <% if teams_data.css("league").find_all{|l| l.at_css("is_finished").nil?}.present? %>
+  <div class="page-header">
+  <h1>Your Yahoo Fantasy Sports Teams</h1>
+  </div>
+  <ul class="unstyled">
+  <% teams_data.css("league").find_all{|l| l.at_css("is_finished").nil?}.group_by{|l| l.parent.parent.at_css("name").text}.each do |game_name, game_leagues| %>
+    <li><%= game_name %></li>
+    <% game_leagues.each do |league| %>
+      <li><%= link_to "#{league.at_css("team name").text} - #{league.at_css("name").text}", game_path(league.parent.parent.at_css("game_key").text, :l => league.at_css("league_id").text, :t => league.at_css("team_id").text) %></li>
+    <% end %>
+  <% end %>
+  </ul>
+  <% else %>
+    You have no active Yahoo Fantasy Sports teams.
+  <% end %>
+</div>
+<% else %>
+<div class="well">
+  <p>Please sign in with Yahoo to view your Yahoo Fantasy Sports teams.</p>
+  <br />
+  <%= link_to "Sign in with Yahoo", "/auth/yahoo", :class => "btn btn-info btn-large" %>  
+</div>
+<% end %>

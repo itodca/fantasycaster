@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FantasyCaster - Get an edge in your Yahoo Fantasy Sports leagues</title>
+  <meta property="og:title" content="FantasyCaster" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://www.fantasycaster.com" />
+  <meta property="og:image" content="http://www.fantasycaster.com/fantasycaster-box.png" />
+  <meta property="og:site_name" content="FantasyCaster" />
+  <meta property="fb:admins" content="518031336" />
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= yield(:head) %>
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31005806-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="<%= root_path %>">FantasyCaster</a>
+        <ul class="nav">
+          <li><%= link_to "News", "/news" %></li>
+          <% if current_user %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Your Yahoo Teams
+                  <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu no-collapse">
+              <% teams_data.css("league").find_all{|l| l.at_css("is_finished").nil?}.each do |league| %>
+              <li><%= link_to "#{league.at_css("team name").text} - #{league.at_css("name").text}", game_path(league.parent.parent.at_css("game_key").text, :l => league.at_css("league_id").text, :t => league.at_css("team_id").text) %></li>
+              <% end %>
+            </ul>
+          </li>
+          
+          <% end %>
+        </ul>
+        <ul class="nav pull-right">
+        <% if current_user %> 
+          <li><%= link_to "Sign Out", signout_path %></li>
+        <% else %>
+          <li><%= link_to "Sign in to Yahoo", "/auth/yahoo" %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+      <%= yield %>
+  </div>
+<footer>
+  <div class="container">
+  <div class="pull-left">
+  Email any questions or suggestions to <%= mail_to "support@fantasycaster.com" %>
+  </div>
+  <div class="pull-right">
+    <%= image_tag("http://l.yimg.com/a/i/ydn/poweredby-71x30.png") %></div>
+  </div>
+</div>
+</footer>
+</body>
+</html>

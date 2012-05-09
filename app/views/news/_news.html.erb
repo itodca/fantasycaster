@@ -1,0 +1,20 @@
+<div class="page-header">
+<h1>Latest Fantasy Sports News
+<span class="pull-right"><%= image_tag("daylife.jpg") %></span>
+</h1>
+</div>
+<ul class="nav nav-tabs">
+  <li <%= "class='active'" if news_type == "baseball" %>><%= link_to "Baseball", "/news/baseball" %></li>
+  <li <%= "class='active'" if news_type == "football" %>><%= link_to "Football", "/news/football" %></li>
+  <li <%= "class='active'" if news_type == "hockey" %>><%= link_to "Hockey", "/news/hockey" %></li>
+</ul>
+<div class="news">
+  <ol>
+    <% @news.css("article > url").each do |article_url| %>
+      <li>
+        <%= link_to article_url.parent.at_css("headline").text, article_url.text %>
+        <div class="timestamp">Created <%= time_ago_in_words(article_url.parent.at_css("timestamp").text.to_time) %> ago at <span class="domain"><%= URI.parse(article_url.parent.at_css("source url").text).host %></span></div>
+      </li>
+    <% end %>
+  </ol>
+</div>

@@ -1,0 +1,100 @@
+@import 'variables';
+@import 'bootstrap';
+
+body {
+  padding-top: 80px;
+}
+
+footer { padding: 40px 0; }
+h1, h2 { letter-spacing: 1px; }
+h2 { padding-bottom: 5px; color: $blue; }
+abbr[title] { border-bottom: none; }
+
+.navbar .brand { font-family: 'Average', Georgia, serif; letter-spacing: 2px; font-size: 32px; padding: 12px 20px;}
+.navbar .nav { margin-top: 10px; }
+.navbar .dropdown-menu::before { border-bottom-color: #ccc; }
+
+.page-header { margin: 0; border-bottom: none; }
+.page-header .btn-large { margin-top: -10px; }
+
+.badge { font-weight: normal; }
+.winning-stat { color: $blue; }
+
+.hero-unit h1 { font-family: 'Average', Georgia, serif; margin-bottom: 5px; }
+.alert-success h1, .alert-success h2 { color: #468847; }
+
+#myCarousel { border: 1px solid $grayLight; }
+
+ul.nav-tabs { margin-bottom: 0; }
+
+div.news {
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 20px;
+  li {
+    padding: 5px 0;
+    font-size: medium;
+  }
+  .domain { color: $grayLight; font-size: 12px; }
+  .timestamp { font-size: 12px; }
+}
+
+span.playerStatus { margin-right: 20px; }
+span.playerStatus input { margin: 0 3px 0 0; }
+span.playerStatus label { cursor: pointer; }
+
+table.stats-horizontal {
+  font-size: 14px;
+  border: 1px solid #ddd;
+  th, td { vertical-align: middle; text-align: center; }
+  th { background: $grayLight; color: $white; }
+  th.title { width: 200px; }
+  td { background: $white; }
+  td.left-align { text-align: left; }
+  td.summary { border-left: 1px solid #ddd; background: #eee; color: $blueDark; }
+  span.description { font-weight: normal; color: $grayLight; }
+  tr.a td { color: $infoText; }
+  tr.u td { color: $successText; }
+}
+
+table.stats-vertical {
+  font-size: 14px;
+  width: auto;
+  line-height: 18px;
+  border: none;
+  td { background: transparent !important; width: 50px; padding: 0; }
+}
+
+table.no-border {
+  th, td { border-top: none; }
+}
+
+.dataTables_wrapper table th { text-align: left !important; }
+.dataTables_scrollHeadInner table { margin-bottom: 0; }
+.dataTables_scrollBody { margin-bottom: 18px; }
+.dataTables_scrollBody table { border-top: none; }
+
+table.table {
+	clear: both;
+}
+
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+	cursor: pointer;
+	*cursor: hand;
+}
+
+table.table thead .sorting { background: $grayLight url('images/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: $grayLight url('images/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: $grayLight url('images/sort_desc.png') no-repeat center right; }
+
+table.table thead .sorting_asc_disabled { background: $grayLight url('images/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: $grayLight url('images/sort_desc_disabled.png') no-repeat center right; }
+
+table.dataTable th:active {
+	outline: none;
+}

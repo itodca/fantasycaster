@@ -1,0 +1,131 @@
+<div class="well">
+  <div class="page-header">
+    <h1><%= @league_teams_statistics[params[:t]][:team_name] %> - <%= @league_data.at_css("league name").text %></h1>
+  </div>
+<% if @league_data.at_css("scoring_type").text == "head" %>
+
+<h2>Week <%= @current_week %> Scoring Summary</h2>
+<table class="table table-condensed stats-horizontal">
+  <thead>
+    <tr>
+      <th></th>
+      <th style="width: 180px"></th>
+      <% @statistic_types.find_all{|k,v| v[:is_only_display_stat].nil?}.each do |k, v| %>
+        <th><abbr title="<%= v[:name] %>"><%= v[:display_name] %></abbr></th>
+      <% end %>
+      <th class="summary">Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= image_tag(@league_teams_statistics[params[:t]][:logo_url], :width => "48px") %></td>
+      <td class="title"><%= @matchup_scores[@current_week][:team_name] %></td>
+      <% @matchup_scores[@current_week][:stats].each do |stat_key, stat| %>
+        <td><%= head_to_head_badge(stat[:value], stat[:status], false) %></td>
+      <% end %>
+      <td class="summary"><%= score_badge(@matchup_scores[@current_week][:points], @matchup_scores[@current_week][:opp_points]) %></td>
+    </tr>
+    <tr>
+      <td><%= image_tag(@matchup_scores[@current_week][:logo_url], :width => "48px") %></td>
+      <td class="title"><%= @matchup_scores[@current_week][:opp_team_name] %></td>
+      <% @matchup_scores[@current_week][:stats].each do |stat_key, stat| %>
+        <td><%= head_to_head_badge(stat[:opp_value], stat[:status], true) %></td>
+      <% end %>
+      <td class="summary"><%= score_badge(@matchup_scores[@current_week][:opp_points], @matchup_scores[@current_week][:points]) %></td>
+    </tr>
+  </tbody>
+</table>
+<% @upcoming_opponents.each do |opponent_key, opponent| %>
+<h2><%= "Week #{opponent[:week]} Matchup" %></h2>
+<table class="table table-condensed stats-horizontal">
+  <thead>
+    <tr>
+      <th></th>
+      <th style="width: 180px"></th>
+      <% @statistic_types.find_all{|k,v| v[:is_only_display_stat].nil?}.each do |k, v| %>
+        <th><abbr title="<%= v[:name] %>"><%= v[:display_name] %></abbr></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= image_tag(@league_teams_statistics[params[:t]][:logo_url], :width => "48px") %></td>
+      <td class="title"><%= @league_teams_statistics[params[:t]][:team_name] %></td>
+      <% opponent[:stats].each do |stat_key, stat| %>
+        <td><%= head_to_head_badge(stat[:user_stat_value], stat[:status], false) %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td><%= image_tag(opponent[:logo_url], :width => "48px") %></td>
+      <td class="title"><%= opponent[:opp_team_name] %></td>
+      <% opponent[:stats].each do |stat_key, stat| %>
+        <td><%= head_to_head_badge(stat[:value], stat[:status], true) %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+<% end %>
+<% elsif @league_data.at_css("scoring_type").text == "roto" %>
+<table class="table table-condensed stats-horizontal">
+  <thead>
+    <tr>
+      <th style="width: 200px"></th>
+      <% @statistic_types.find_all{|k,v| v[:is_only_display_stat].nil?}.each do |k, v| %>
+        <th><abbr title="<%= v[:name] %>"><%= v[:display_name] %></abbr></th>
+      <% end %>
+      <th class="highlight">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="title">League Points</td>
+      <% league_points(@league_data)[params[:t]][:stats].each do |k, v| %>
+        <td><%= points_badge(v[:points]) %></td>
+      <% end %>
+      <td class="highlight"><%= @league_data.css("team").find{|t| t.at_css("team_id").text == params[:t]}.at_css("team_points total").text %></td>
+    </tr>
+    <tr>
+      <td class="title">Stats</td>
+      <% @league_teams_statistics[params[:t]][:stats].each do |stat_key, stat| %>
+          <td><%= stat[:value] %></td>
+      <% end %>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<% end %>
+</div>
+<div class="well">
+<div class="page-header">
+<h1>Your FantasyCast</h1>
+</div>
+<p>FantasyCaster looks at the league leaders from the last month and compares them to your roster.&nbsp;&nbsp;We do this by ranking your players using a unique algorithm based on your league's settings.&nbsp;&nbsp;Use these tables to find available players, trade for players that can help your team, or drop some underperforming players.</p>
+<div id="players"><span style="color: #999;">FantasyCaster is analyzing your league.  Please wait...</span></div>
+</div>
+<% content_for :head do %>
+<script>
+   $.fn.dataTableExt.afnFiltering.push(
+      function( oSettings, aData, iDataIndex ) {
+        return $("#" + oSettings.sTableId + aData[3]).prop("checked");
+      }
+  );
+
+  $(function() {
+    $.get('/games/<%= params[:id] %>/players', { l: '<%= params[:l] %>', t: '<%= params[:t] %>' }, function(data) {
+      $("#players").hide().html(data).fadeIn();
+      $("table.players").dataTable({
+        bRetrieve: true,
+        sDom: 't',
+        sScrollY: "400px",
+        bPaginate: false,
+        aoColumnDefs: [
+          { "bVisible": false, "aTargets": [3] }
+        ]
+      });
+      $("input.playerStatus").change(function() {
+        $("#" + $(this).attr("data-table")).dataTable().fnDraw();
+      });
+    });
+  });
+</script>
+<% end %>

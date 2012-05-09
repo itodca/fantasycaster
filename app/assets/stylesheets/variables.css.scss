@@ -1,0 +1,103 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700|Average);
+
+// GLOBAL VALUES
+// --------------------------------------------------
+
+
+// Grays
+// -------------------------
+$black:                 #000;
+$grayDarker:            #2C2C2C;
+$grayDark:              #333;
+$gray:                  #555;
+$grayLight:             #999;
+$grayLighter:           #eee;
+$white:                 #fff;
+
+
+// Accent colors
+// -------------------------
+$blue:                  #15C;
+$blueDark:              #013368;
+$green:                 #3D9400;
+$red:                   #b6061d;
+$yellow:                #FFCA27;
+$orange:                #FF6600;
+$pink:                  #ED2590;
+$purple:                #9B479F;
+
+// Scaffolding
+// -------------------------
+$bodyBackground:        #FDFDFA;
+$textColor:             $gray;
+
+
+// Links
+// -------------------------
+$linkColor:             #366DDC;
+$linkColorHover:        darken($linkColor, 15%);
+
+// Typography
+// -------------------------
+$baseFontSize:          16px;
+$baseFontFamily:        'Open Sans', Verdana, Helvetica, sans-serif;
+$baseLineHeight:        24px;
+$altFontFamily:         'Open Sans', Verdana, Helvetica, sans-serif;
+
+$headingsFontFamily:    inherit; // empty to use BS default, $baseFontFamily
+$headingsFontWeight:    inherit;    // instead of browser default, bold
+$headingsColor:         $red; // empty to use BS default, $textColor
+
+
+// Tables
+// -------------------------
+$tableBackground:                   transparent; // overall background-color
+$tableBackgroundAccent:             darken($bodyBackground, 2%); // for striping
+$tableBackgroundHover:              darken($bodyBackground, 4%); // for hover
+$tableBorder:                       #ddd; // table and cell border
+
+
+// Buttons
+// -------------------------
+$btnBackground:                     $white;
+$btnBackgroundHighlight:            darken($white, 10%);
+$btnBorder:                         darken($white, 20%);
+
+$btnPrimaryBackground:              $linkColor;
+$btnPrimaryBackgroundHighlight:     adjust-hue($btnPrimaryBackground, 15%);
+
+$btnInfoBackground:                 #5bc0de;
+$btnInfoBackgroundHighlight:        #2f96b4;
+
+$btnSuccessBackground:              #62c462;
+$btnSuccessBackgroundHighlight:     #51a351;
+
+$btnWarningBackground:              lighten($orange, 15%);
+$btnWarningBackgroundHighlight:     $orange;
+
+$btnDangerBackground:               #ee5f5b;
+$btnDangerBackgroundHighlight:      #bd362f;
+
+$btnInverseBackground:              $gray;
+$btnInverseBackgroundHighlight:     $grayDarker;
+
+// COMPONENT VARIABLES
+// --------------------------------------------------
+
+// Navbar
+// -------------------------
+$navbarBackground:                $blueDark;
+$navbarBackgroundHighlight:       $blueDark;
+
+$navbarText:                      $white;
+$navbarLinkColor:                 $white;
+$navbarLinkColorHover:            $blue;
+$navbarLinkColorActive:           $navbarLinkColorHover;
+$navbarLinkBackgroundHover:       transparent;
+$navbarLinkBackgroundActive:      $navbarBackground;
+
+// Hero unit
+// -------------------------
+$heroUnitBackground:              whitesmoke;
+$heroUnitHeadingColor:            inherit;
+$heroUnitLeadColor:               inherit;

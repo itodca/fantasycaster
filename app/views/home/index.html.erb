@@ -1,0 +1,27 @@
+<div id="myCarousel" class="carousel">
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <div class="active item">
+      <%= link_to image_tag("news.jpg", :title => "Photo taken by Jon S under Creative Commons License"), "/news" %>
+      <div class="carousel-caption">
+        <h2>Stay Ahead of the Game</h2>
+        <p>Get the latest fantasy news for all of your favorite sports right here.</p>
+      </div>
+    </div>
+    <div class="item">
+      <%= link_to image_tag("yahoo.jpg"), "/games" %>
+      <div class="carousel-caption">
+        <h2>Dominate your League</h2>
+        <p>In a Yahoo Fantasy Baseball, Football, or Hockey league?&nbsp;&nbsp;You've just struck fantasy sports gold!&nbsp;&nbsp;FantasyCaster analyzes <strong>your</strong> league's settings to help you make the right decisions so that you can dominate the competition.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+<script>
+  $(function() {
+      $('.carousel').carousel({ interval: 5000 });
+  });
+</script>

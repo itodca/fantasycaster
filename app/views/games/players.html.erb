@@ -1,0 +1,34 @@
+<% @statistic_types.group_by{|k,v| v[:position_type]}.each do |position_type, statistic_types_by_position| %>
+  <h2>Top <%= position_type_description(@league_code, position_type).pluralize %> Last Month</h2>
+  <div class="form-inline">
+  <%= player_status_toggle(position_type, "Your Team", "U", true) %>&nbsp;&nbsp;
+  <%= player_status_toggle(position_type, "Available Players", "A", true) %>&nbsp;&nbsp;
+  <%= player_status_toggle(position_type, "Other Owned Players", "O", true) %>
+  </div>
+  <table id="<%= position_type %>" class="table table-condensed table-striped stats-horizontal players" style="width:100%">
+    <thead>
+      <tr>
+        <th>FC Rank</th>
+        <th class="title"><%= position_type_description(@league_code, position_type).pluralize %></th>
+        <th>Owner</th>
+        <th></th>
+        <% statistic_types_by_position.each do |k, v| %>
+          <th><%= v[:display_name] %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @detailed_rankings.find_all{|k,v| v[:position_type] == position_type}.each_with_index do |(k,v), index| %>
+      <tr class='<%= v[:status].downcase %>'>
+        <td><%= index + 1 %></td>
+        <td class="left-align"><%= v[:player_name] %> <span class="description">(<%= v[:positions] %>)</span></td>
+        <td class="left-align"><%= v[:owner] %></td>
+        <td><%= v[:status] %></td>
+        <% v[:stats].each do |k,v| %>
+            <td><%= v[:value] %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
