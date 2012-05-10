@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def is_active?(options = {})
+    (options[:controllers] && options[:actions] && options[:controllers].include?(params[:controller]) && options[:actions].include?(params[:action])) || (options[:controllers] && options[:actions].nil? && options[:controllers].include?(params[:controller])) || (options[:active])
+  end
+  
+  def nav_item(content, options = {})
+    is_active?(options) ? content_tag(:li, content, :class => "active") : content_tag(:li, content)
+  end
+  
   def position_type_description(league_code, abbreviation)
     if league_code == 'mlb'
       abbreviation == 'B' ? 'Batter' : 'Pitcher'

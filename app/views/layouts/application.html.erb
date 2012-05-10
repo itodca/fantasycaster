@@ -32,9 +32,9 @@
       <div class="container">
         <a class="brand" href="<%= root_path %>">FantasyCaster</a>
         <ul class="nav">
-          <li><%= link_to "News", "/news" %></li>
+          <%= nav_item(link_to("Latest News", "/news"), :controllers => ["news"]) %>
           <% if current_user %>
-          <li class="dropdown">
+          <li class="dropdown <%= 'active' if params[:controller] == "games" %>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Your Yahoo Teams
                   <b class="caret"></b>
@@ -45,16 +45,15 @@
               <% end %>
             </ul>
           </li>
-          
+          <% else %>
+          <li><%= link_to "Sign in to Yahoo", "/auth/yahoo" %></li>
           <% end %>
         </ul>
-        <ul class="nav pull-right">
         <% if current_user %> 
+        <ul class="nav pull-right">
           <li><%= link_to "Sign Out", signout_path %></li>
-        <% else %>
-          <li><%= link_to "Sign in to Yahoo", "/auth/yahoo" %></li>
-        <% end %>
         </ul>
+        <% end %>
       </div>
     </div>
   </div>
