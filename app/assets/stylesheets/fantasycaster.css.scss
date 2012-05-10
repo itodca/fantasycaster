@@ -18,7 +18,7 @@ abbr[title] { border-bottom: none; }
 .page-header .btn-large { margin-top: -10px; }
 
 .badge { font-weight: normal; }
-.winning-stat { color: $blue; }
+.winning-stat { font-weight: bold; }
 
 .hero-unit h1 { font-family: 'Average', Georgia, serif; margin-bottom: 5px; }
 .alert-success h1, .alert-success h2 { color: #468847; }
@@ -43,9 +43,16 @@ div.news {
 div.filter-bar {
   label { font-size: 12px !important };
 }
+
 span.playerStatus { margin-right: 20px; }
 span.playerStatus input { margin: 0 5px 0 0; }
 span.playerStatus label { cursor: pointer; }
+
+label.a { color: $purple; font-weight: bold; }
+label.u { font-weight: bold; }
+label.o { color: $gray; }
+
+/* TABLES STYLING */
 
 table.table {
 	clear: both;
@@ -56,20 +63,16 @@ table.table {
 table.stats-horizontal {
   font-size: 14px;
   border: 1px solid #ddd;
-  th, td { vertical-align: middle; text-align: center; }
-  th.title { width: 200px; }
+  width: auto;
+  th, td { vertical-align: middle; }
+  th.stat { width: 40px; }
   td { background: $white; }
   td.left-align { text-align: left; }
-  td.summary { border-left: 1px solid #ddd; background: #eee; color: $blueDark; }
-  span.description { font-weight: normal; color: $grayLight; }
-  tr.a td { color: $blue; font-weight: bold; }
+  td.summary { border-left: 1px solid #ddd; background: #f3f3f3; color: $blueDark; }
+  tr.a td { color: $purple; font-weight: bold; }
   tr.u td { font-weight: bold; }
-  tr.o td { color: #777; }
+  tr.o td { color: $gray; }
 }
-
-label.a { color: $blue; font-weight: bold; }
-label.u { font-weight: bold; }
-label.o { color: #777; }
 
 table.stats-vertical {
   font-size: 14px;
@@ -79,9 +82,7 @@ table.stats-vertical {
   td { background: transparent !important; width: 50px; padding: 0; }
 }
 
-table.no-border {
-  th, td { border-top: none; }
-}
+/* DATATABLES STYLING */
 
 .dataTables_wrapper table th { text-align: left !important; }
 .dataTables_scrollHeadInner table { margin-bottom: 0; }

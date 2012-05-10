@@ -9,13 +9,13 @@
 <% if @league_data.at_css("scoring_type").text == "head" %>
 
 <h2>Week <%= @current_week %> Scoring Summary</h2>
-<table class="table table-condensed stats-horizontal">
+<table class="table table-condensed table-bordered stats-horizontal">
   <thead>
     <tr>
       <th></th>
       <th style="width: 180px"></th>
       <% @statistic_types.find_all{|k,v| v[:is_only_display_stat].nil?}.each do |k, v| %>
-        <th><abbr title="<%= v[:name] %>"><%= v[:display_name] %></abbr></th>
+        <th class="stat"><abbr title="<%= v[:name] %>"><%= v[:display_name] %></abbr></th>
       <% end %>
       <th class="summary">Score</th>
     </tr>
@@ -23,7 +23,7 @@
   <tbody>
     <tr>
       <td><%= image_tag(@league_teams_statistics[params[:t]][:logo_url], :width => "48px") %></td>
-      <td class="title"><%= @matchup_scores[@current_week][:team_name] %></td>
+      <td class="left-align"><strong><%= @matchup_scores[@current_week][:team_name] %></strong></td>
       <% @matchup_scores[@current_week][:stats].each do |stat_key, stat| %>
         <td><%= head_to_head_badge(stat[:value], stat[:status], false) %></td>
       <% end %>
@@ -31,7 +31,7 @@
     </tr>
     <tr>
       <td><%= image_tag(@matchup_scores[@current_week][:logo_url], :width => "48px") %></td>
-      <td class="title"><%= @matchup_scores[@current_week][:opp_team_name] %></td>
+      <td class="left-align"><%= @matchup_scores[@current_week][:opp_team_name] %></td>
       <% @matchup_scores[@current_week][:stats].each do |stat_key, stat| %>
         <td><%= head_to_head_badge(stat[:opp_value], stat[:status], true) %></td>
       <% end %>
@@ -41,27 +41,27 @@
 </table>
 <% @upcoming_opponents.each do |opponent_key, opponent| %>
 <h2><%= "Week #{opponent[:week]} Matchup" %></h2>
-<table class="table table-condensed stats-horizontal">
+<table class="table table-condensed table-bordered stats-horizontal">
   <thead>
     <tr>
       <th></th>
       <th style="width: 180px"></th>
       <% @statistic_types.find_all{|k,v| v[:is_only_display_stat].nil?}.each do |k, v| %>
-        <th><abbr title="<%= v[:name] %>"><%= v[:display_name] %></abbr></th>
+        <th class="stat"><abbr title="<%= v[:name] %>"><%= v[:display_name] %></abbr></th>
       <% end %>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><%= image_tag(@league_teams_statistics[params[:t]][:logo_url], :width => "48px") %></td>
-      <td class="title"><%= @league_teams_statistics[params[:t]][:team_name] %></td>
+      <td class="left-align"><strong><%= @league_teams_statistics[params[:t]][:team_name] %></strong></td>
       <% opponent[:stats].each do |stat_key, stat| %>
         <td><%= head_to_head_badge(stat[:user_stat_value], stat[:status], false) %></td>
       <% end %>
     </tr>
     <tr>
       <td><%= image_tag(opponent[:logo_url], :width => "48px") %></td>
-      <td class="title"><%= opponent[:opp_team_name] %></td>
+      <td class="left-align"><%= opponent[:opp_team_name] %></td>
       <% opponent[:stats].each do |stat_key, stat| %>
         <td><%= head_to_head_badge(stat[:value], stat[:status], true) %></td>
       <% end %>
@@ -70,26 +70,26 @@
 </table>
 <% end %>
 <% elsif @league_data.at_css("scoring_type").text == "roto" %>
-<table class="table table-condensed stats-horizontal">
+<table class="table table-condensed table-bordered stats-horizontal">
   <thead>
     <tr>
-      <th style="width: 200px"></th>
+      <th style="width: 180px"></th>
       <% @statistic_types.find_all{|k,v| v[:is_only_display_stat].nil?}.each do |k, v| %>
-        <th><abbr title="<%= v[:name] %>"><%= v[:display_name] %></abbr></th>
+        <th class="stat"><abbr title="<%= v[:name] %>"><%= v[:display_name] %></abbr></th>
       <% end %>
       <th class="highlight">Total</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td class="title">League Points</td>
+      <td class="left-align">League Points</td>
       <% league_points(@league_data)[params[:t]][:stats].each do |k, v| %>
         <td><%= points_badge(v[:points]) %></td>
       <% end %>
       <td class="highlight"><%= @league_data.css("team").find{|t| t.at_css("team_id").text == params[:t]}.at_css("team_points total").text %></td>
     </tr>
     <tr>
-      <td class="title">Stats</td>
+      <td class="left-align">Stats</td>
       <% @league_teams_statistics[params[:t]][:stats].each do |stat_key, stat| %>
           <td><%= stat[:value] %></td>
       <% end %>
@@ -123,6 +123,7 @@
         sScrollY: "400px",
         bPaginate: false,
         aoColumnDefs: [
+          { sWidth: "200px", aTargets: [1, 2] },
           { "bVisible": false, "aTargets": [3] }
         ]
       });

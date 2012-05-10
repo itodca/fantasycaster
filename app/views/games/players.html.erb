@@ -5,15 +5,15 @@
   <%= player_status_toggle(position_type, "Available Players", "A", true) %>&nbsp;&nbsp;
   <%= player_status_toggle(position_type, "Other Owned Players", "O", true) %>
   </div>
-  <table id="<%= position_type %>" class="table table-condensed table-striped stats-horizontal players" style="width:100%">
+  <table id="<%= position_type %>" class="table table-condensed table-bordered table-striped stats-horizontal players">
     <thead>
       <tr>
-        <th>FC Rank</th>
-        <th class="title"><%= position_type_description(@league_code, position_type).pluralize %></th>
+        <th>Rank</th>
+        <th><%= position_type_description(@league_code, position_type).pluralize %></th>
         <th>Owner</th>
         <th></th>
         <% statistic_types_by_position.each do |k, v| %>
-          <th><%= v[:display_name] %></th>
+          <th class="stat"><%= v[:display_name] %></th>
         <% end %>
       </tr>
     </thead>
@@ -21,8 +21,8 @@
       <% @detailed_rankings.find_all{|k,v| v[:position_type] == position_type}.each_with_index do |(k,v), index| %>
       <tr class='<%= v[:status].downcase %>'>
         <td><%= index + 1 %></td>
-        <td class="left-align"><%= v[:player_name] %> <span class="description">(<%= v[:positions] %>)</span></td>
-        <td class="left-align"><%= v[:owner] %></td>
+        <td><%= v[:player_name] %> (<%= v[:positions] %>)</td>
+        <td><%= v[:owner] %></td>
         <td><%= v[:status] %></td>
         <% v[:stats].each do |k,v| %>
             <td><%= v[:value] %></td>

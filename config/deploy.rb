@@ -1,8 +1,8 @@
 # RVM
 
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+#~ $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 set :rvm_ruby_string, 'default'
-set :rvm_type, :systen
+set :rvm_type, :user
 require 'rvm/capistrano'
 
 # General
@@ -110,7 +110,6 @@ namespace :deploy do
   end
   
   namespace :nginx do
-    
     desc "Restarts NginX."
     task :restart do
       run "cd #{current_path}; service nginx restart"
@@ -125,6 +124,6 @@ namespace :deploy do
   end
 end
 
-#~ after 'deploy:update_code' do
-  #~ run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
-#~ end
+after 'deploy:update_code' do
+  run "cd #{release_path}; rake assets:precompile RAILS_ENV=production"
+end
